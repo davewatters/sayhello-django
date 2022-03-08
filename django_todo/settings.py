@@ -34,6 +34,7 @@ DEBUG = "DEVELOPMENT" in os.environ
 
 print('*'* 40)
 # print(SECRET_KEY)
+print(os.getpid())
 print('DEBUG = ',DEBUG)
 print('*'* 40)
 
