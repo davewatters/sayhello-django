@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # DEBUG = True
 
 # Must be set when DEBUG is False
-ALLOWED_HOSTS = [ "localhost" ]
+ALLOWED_HOSTS = [  "https://ci-dw-sayhello-django.herokuapp.com", "localhost" ]
 
 # SECURITY: Created a .env file in same dir as this file
 load_dotenv()
