@@ -24,6 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY Moved to .env file
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
+
+# Must be set when DEBUG is False
 ALLOWED_HOSTS = [ "localhost" ]
 
 # SECURITY: Created a .env file in same dir as this file
@@ -34,7 +36,7 @@ DEBUG = "DEVELOPMENT" in os.environ
 
 print('*'* 40)
 # print(SECRET_KEY)
-print(os.getpid())
+print("PID ",os.getpid())
 print('DEBUG = ',DEBUG)
 print('*'* 40)
 
