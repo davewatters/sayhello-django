@@ -33,7 +33,6 @@ def edit_item(request, item_id):
         form = ItemForm(request.POST, instance=item)
         if form.is_valid():
             form.save()
-            print("should redirect to main get_todo_list which is todo_list.html")
             return redirect('get_todo_list')
     form = ItemForm(instance=item)
     context = {
