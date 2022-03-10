@@ -19,7 +19,6 @@ def add_item(request):
         form = ItemForm(request.POST)
         if form.is_valid():
             form.save()
-            print("shoudl redirect to main get_todo_list which is todo_list.html")
             return redirect('get_todo_list')
     form = ItemForm()
     context = {

@@ -25,7 +25,7 @@ DEVELOPMENT = os.environ.get('DEVELOPMENT', False)
 DEBUG = DEVELOPMENT
 
 # SECRET_KEY Moved to .env file
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 ##
