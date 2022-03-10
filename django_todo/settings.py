@@ -10,37 +10,54 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import os
 import dj_database_url
-
-from pathlib import Path
+import os
 from dotenv import load_dotenv
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY Moved to .env file
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-
-# Must be set when DEBUG is False
-ALLOWED_HOSTS = [ 'ci-dw-sayhello-django.herokuapp.com', 'localhost' ]
-
 # SECURITY: Created a .env file in same dir as this file
 load_dotenv()
-SECRET_KEY = os.environ.get("SECRET_KEY")
-DEBUG = "DEVELOPMENT" in os.environ
-# DEBUG = False
 
-print('*'* 40)
-# print(SECRET_KEY)
+DEVELOPMENT = os.environ.get('DEVELOPMENT', False)
+DEBUG = DEVELOPMENT
+
+# SECRET_KEY Moved to .env file
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
+
+##
+# Remove before final deployment
+print('*'* 50)
 print("PID ",os.getpid())
 print('DEBUG = ',DEBUG)
-print('*'* 40)
+print('BASE_DIR = ',BASE_DIR)
+# print(SECRET_KEY)
+print('*'* 50)
+#
+##
+
+
+if DEVELOPMENT:
+    ALLOWED_HOSTS = [ 'localhost' ]
+else:
+    ALLOWED_HOSTS = [ os.environ.get('ALLOWED_HOSTS') ]
+
+# Database
+# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+if DEVELOPMENT:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.parse('DATABASE_URL')
+}
 
 # Application definition
 
@@ -83,22 +100,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'django_todo.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-DATABASES = {
-    'default': dj_database_url.parse('postgres://gtykymxxyymanp:58d1f39b752b29f72d6070bda2cc1c914f33b6d0c813386bb6ed723e1098fbf7@ec2-52-50-171-4.eu-west-1.compute.amazonaws.com:5432/d4eimv2p9uaamm')
-}
-
-
 
 
 # Password validation
